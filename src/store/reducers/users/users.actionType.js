@@ -1,0 +1,8 @@
+const actionType = {
+    USER_LOGIN_START: "USER_LOGIN_START",
+    USER_LOGIN_SUCCESS: "USER_LOGIN_SUCCESS",
+    USER_LOGIN_ERROR: "USER_LOGIN_ERROR",
+    USER_LOGOUT: "USER_LOGOUT",
+};
+
+export default actionType;
