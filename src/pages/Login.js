@@ -15,7 +15,7 @@ const Login = () => {
   const { isLoading, errorMessage, isLogin } = useSelector(
     (state) => state.user
   );
-  const [inputEmail, setinputEmail] = useState("test@gmail.com");
+  const [inputEmail, setinputEmail] = useState("maubeli@gmail.com");
   const [inputPassword, setinputPassword] = useState("test123");
 
   const handleLoginSocialMedia = async (provider) => {
@@ -56,6 +56,7 @@ const Login = () => {
               type="email"
               class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:shadow-outline text-gray-600 font-medium"
               placeholder="Email kamu..."
+              value={inputEmail}
               onChange={(e) => setinputEmail(e.target.value)}
               required
             />
@@ -68,6 +69,7 @@ const Login = () => {
               type="password"
               class="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:shadow-outline text-gray-600 font-medium"
               placeholder="Password kamu..."
+              value={inputPassword}
               onChange={(e) => setinputPassword(e.target.value)}
               required
             />

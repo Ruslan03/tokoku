@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAllProduct } from "../../services/products.service";
 import { addCart } from "../../services/cart.service";
 import { useHistory } from "react-router-dom";

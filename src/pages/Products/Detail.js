@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addCart } from "../../services/cart.service";
 import { getProductByID } from "../../services/products.service";
@@ -8,7 +8,7 @@ const Detail = () => {
   const [product, setProduct] = useState(null);
   const [inserting, setInserting] = useState(false);
   const { code } = useParams();
-  const { uid } = useSelector((state) => state.user);
+  const { uid, isLogin } = useSelector((state) => state.user);
   const [qty, setQty] = useState(1);
 
   const addToChart = () => {
@@ -44,32 +44,46 @@ const Detail = () => {
           />
           <div class="flex flex-col justify-between lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <div>
-                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-                    {product.ProductName}
-                </h1>
-                <p class="leading-relaxed mt-4">
-                    {product.ProductDescription}
-                </p>
+              <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+                {product.ProductName}
+              </h1>
+              <p class="leading-relaxed mt-4">{product.ProductDescription}</p>
 
-                <span class="title-font font-medium text-2xl w-2/3  text-gray-900">
-                    {kFormatter(product.ProductPrice)}
-                </span>
+              <span class="title-font font-medium text-2xl w-2/3  text-gray-900">
+                {kFormatter(product.ProductPrice)}
+              </span>
             </div>
-            
-            <div class="flex gap-1">
-              
-              <input
-                type="number"
-                class="w-full px-4 rounded-lg border-2 focus:outline-none focus:shadow-outline text-gray-600 font-medium"
-                placeholder="Quantity..."
-                required
-                onChange={(e) => setQty(e.target.value)}
-                value={qty}
-                />
-              <button onClick={addToChart} class="flex flex-shrink-0 ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">
-              {inserting ? "Memasukan ke keranjang..." : "Add To Cart"}
-              </button>
-              
+
+            <div>
+              {isLogin ? (
+                <div className="flex gap-1">
+                  <input
+                    type="number"
+                    class="w-full px-4 rounded-lg border-2 focus:outline-none focus:shadow-outline text-gray-600 font-medium"
+                    placeholder="Quantity..."
+                    required
+                    onChange={(e) => setQty(e.target.value)}
+                    value={qty}
+                  />
+                  <button
+                    onClick={addToChart}
+                    class="flex flex-shrink-0 ml-auto text-white bg-yellow-500 hover:bg-yellow-600 border-0 py-2 px-6 focus:outline-none rounded"
+                  >
+                    {inserting ? "Memasukan ke keranjang..." : "Add To Cart"}
+                  </button>
+                </div>
+              ) : (
+                
+                <div className="block text-right">
+<Link
+                  to="/login"
+                  disabled
+                  class="text-white bg-gray-500 hover:bg-gray-600 border-0 py-2 px-6 focus:outline-none rounded"
+                >
+                  Tertarik? Login dulu yuk :)
+                </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
